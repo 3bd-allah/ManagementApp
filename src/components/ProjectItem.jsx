@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const ProjectItem = ({ id, title, date, tasks, isActive }) => {
 
   return (
-    <Link to={}>
+    <Link to={`/project/${id}`}>
       <button
           className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors text-sm"
         >

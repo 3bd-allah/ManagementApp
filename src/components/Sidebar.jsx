@@ -25,16 +25,16 @@ const Sidebar = () => {
           New Project
         </button>
       </Link>
-
-      <nav className="flex-1 px-4 overflow-y-auto">
+      <br />
+      <div className="flex-1 px-4 overflow-y-auto">
         <ul className="space-y-2">
           {projects.map(project => (
               <li key={project.id}>
-                <ProjectItem title={project.title} description={project.description} date={project.date} />
+                <ProjectItem id={project.id} title={project.title} description={project.description} date={project.date} />
               </li>
           ))}
         </ul>
-      </nav>
+      </div>
     </aside>
   );
 };
