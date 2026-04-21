@@ -4,13 +4,17 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import RootLayout from "./routes/RootLayout.jsx";
 import NewProject from "./routes/NewProject.jsx";
+import MainPage from "./components/MainPage.jsx";
+import ProjectItem from "./components/ProjectItem.jsx";
+import ProjectDetails from "./routes/ProjectDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-      { path: "/create-project", element: <NewProject /> },
-      { path: "project/:projectId" },
+      {path:'/', element:<MainPage />},
+      { path: "create-project", element: <NewProject /> },
+      { path: "project/:projectId", element:<ProjectDetails /> },
     ],
   },
 ]);

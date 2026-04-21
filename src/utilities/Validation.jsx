@@ -14,3 +14,9 @@ export const validateDescription= (description) =>{
     return true; 
     
 }
+
+export const isValidateDate = (date)=>{
+    if(date.length === 0 )
+        return false; 
+    return true;
+}
