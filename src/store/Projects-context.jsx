@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const ProjectsContext = createContext({
   projects: [],
@@ -10,6 +10,25 @@ export const ProjectsContext = createContext({
 
 export function ProjectsContextProvider({ children }) {
   const [projects, setProjects] = useState([]);
+
+
+  useEffect(()=>{
+
+    function loadProjects(){
+      // localStorage.clear()
+      const allProjects = [];
+      for(let i = 0; i < localStorage.length; i++){
+        const key = localStorage.key(i);
+        const project = JSON.parse(localStorage.getItem(key));
+        allProjects.push(project);
+      }
+      console.log(allProjects);
+      setProjects(prevProjects => [...allProjects]);
+    }
+
+    loadProjects();
+    
+  },[])
 
   function addProject(project) {
     setProjects((prevProjects) => [project, ...prevProjects]);

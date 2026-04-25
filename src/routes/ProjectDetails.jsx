@@ -1,17 +1,31 @@
 import { use } from 'react';
 import { ProjectsContext } from '../store/Projects-context';
+import { useLoaderData } from 'react-router';
 
-const ProjectDetails = ({ id, title, date, tasks }) => {
-  const { projects } = use(ProjectsContext);
-  const project = projects.filter(p => p.id === id )
-  console.log(project)
+const ProjectDetails = () => {
+
+  const {id,title,date, description,tasks} = useLoaderData();
+  console.log(tasks)
   return (
-    <div>ProjectDetails</div>
+    <>
+      <div>{title}</div>
+      <div>{date}</div>
+      <div>{description}</div>
+      {tasks.length && tasks.map((task, index) => (
+        <ul>
+          <li key={index}>{task}</li>
+        </ul>
+      ))}
+      <div>{tasks}</div>
+    </>
   )
 }
 
 export default ProjectDetails;
 
-export const loader=  () =>{
+export const loader=  ({params}) =>{
   // implement loader func to import project data here:
+  
+  const project = JSON.parse(localStorage.getItem(params.projectId))
+  return project;
 }

@@ -16,17 +16,19 @@ const NewProject = () => {
   })
 
   
-  const handleSubmit = async({title, description, date})=>{
+  const handleSubmit = async({title, description, date},{resetForm})=>{
 
     const newProject = {
         id: crypto.randomUUID(),
         title,
         description,
-        date
+        date,
+        tasks:[]
       }
     console.log(newProject)
     addProject(newProject);
-   
+    localStorage.setItem(newProject.id, JSON.stringify(newProject));
+   resetForm();
   }
 
   return (
@@ -39,6 +41,7 @@ const NewProject = () => {
       }
       validationSchema={newProjectSchema}
       onSubmit={handleSubmit}
+      
     >
       {({isSubmitting})=>(
 

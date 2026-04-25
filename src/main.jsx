@@ -7,6 +7,7 @@ import NewProject from "./routes/NewProject.jsx";
 import MainPage from "./components/MainPage.jsx";
 import ProjectItem from "./components/ProjectItem.jsx";
 import ProjectDetails from "./routes/ProjectDetails.jsx";
+import { loader as projectDetailsLoader } from "./routes/ProjectDetails.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {path:'/', element:<MainPage />},
       { path: "create-project", element: <NewProject /> },
-      { path: "project/:projectId", element:<ProjectDetails /> },
+      { path: "project/:projectId", element:<ProjectDetails />, loader : projectDetailsLoader },
     ],
   },
 ]);
