@@ -19,16 +19,16 @@ const NewProject = () => {
   const handleSubmit = async({title, description, date},{resetForm})=>{
 
     const newProject = {
-        id: crypto.randomUUID(),
+        projectID: crypto.randomUUID(),
         title,
         description,
         date,
-        tasks:[]
+        projectTasks:[]
       }
     console.log(newProject)
     addProject(newProject);
-    localStorage.setItem(newProject.id, JSON.stringify(newProject));
-   resetForm();
+    resetForm();
+    navigate(`/project/${newProject.projectID}`);
   }
 
   return (

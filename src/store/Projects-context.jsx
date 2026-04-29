@@ -6,6 +6,7 @@ export const ProjectsContext = createContext({
   removeProject: (id) => {},
   renameProject: (id, newTitle) => {},
   addTask: (id, newTask) => {},
+  removeTask: (pId, tId) => {}
 });
 
 export function ProjectsContextProvider({ children }) {
@@ -16,14 +17,14 @@ export function ProjectsContextProvider({ children }) {
 
     function loadProjects(){
       // localStorage.clear()
-      const allProjects = [];
+
       for(let i = 0; i < localStorage.length; i++){
         const key = localStorage.key(i);
         const project = JSON.parse(localStorage.getItem(key));
-        allProjects.push(project);
+        console.log(project)
+        setProjects(prevProjects => [project, ...prevProjects]);
       }
-      console.log(allProjects);
-      setProjects(prevProjects => [...allProjects]);
+      
     }
 
     loadProjects();
@@ -31,19 +32,22 @@ export function ProjectsContextProvider({ children }) {
   },[])
 
   function addProject(project) {
+    localStorage.setItem(project.projectID, JSON.stringify(project));
     setProjects((prevProjects) => [project, ...prevProjects]);
+    
   }
 
-  function removeProject(id) {
+  function removeProject(pId) {
+    localStorage.removeItem(pId)
     setProjects((prevProjects) => {
-      return prevProjects.filter((project) => project.id !== id);
+      return prevProjects.filter((project) => project.projectID !== pId);
     });
   }
 
-  function renameProject(id, newTitle) {
+  function renameProject(pId, newTitle) {
     setProjects((prevProjects) => {
       return prevProjects.map((project) => {
-        if (project.id === id) {
+        if (project.projectID === pId) {
           return { ...project, title: newTitle };
         }
         return project;
@@ -51,24 +55,48 @@ export function ProjectsContextProvider({ children }) {
     });
   }
 
-  function addTask(id, newTask) {
-    setProjects((prevProjects) => {
+  async function addTask(pId, newTask) {
+    let updatedProjectForStorage;
+    await setProjects((prevProjects) => {
       return prevProjects.map((project) => {
-        if (project.id === id) {
-          project.tasks.push(newTask);
-          return { ...project };
+        if (project.projectID === pId) {
+          const updatedProject = { ...project, projectTasks: [ newTask, ...project.projectTasks ] };
+          updatedProjectForStorage = updatedProject;
+          return updatedProject;
         }
         return project;
       });
     });
+    
+    localStorage.setItem(pId, JSON.stringify( updatedProjectForStorage))
   }
 
+  async function removeTask(pId, tId) {
+    let updatedProjectForStorage;
+    await setProjects((prevProjects) => {
+      return prevProjects.map((project) => {
+        if (project.projectID === pId) {
+          const updatedProjectTasks = project.projectTasks.filter(task => task.taskId !== tId);
+
+          const updatedProject = { ...project, projectTasks: updatedProjectTasks };
+
+          updatedProjectForStorage = updatedProject;
+
+          return updatedProject;
+        }
+        return project;
+      });
+    });
+    
+    localStorage.setItem(pId, JSON.stringify(updatedProjectForStorage))
+  }
   const contextValue = {
     projects: projects,
     addProject,
     removeProject,
     renameProject,
     addTask,
+    removeTask
   };
   return <ProjectsContext value={contextValue}>{children}</ProjectsContext>;
 }

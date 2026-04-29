@@ -1,9 +1,9 @@
 import React from 'react'
-import image from '../assets/no-projects.png'
+import image  from '../assets/no-projects.png'
 import { Link } from 'react-router'
 
 const MainPage = () => {
-    console.log("main page")
+    
   return (
     <div className="flex flex-col items-center justify-center w-full mt-24">
         <img src={image} alt='Project Management' className="w-24 h-24 object-contain mx-auto"/>

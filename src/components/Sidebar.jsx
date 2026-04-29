@@ -29,8 +29,8 @@ const Sidebar = () => {
       <div className="flex-1 px-4 overflow-y-auto">
         <ul className="space-y-2">
           {projects.map(project => (
-              <li key={project.id}>
-                <ProjectItem id={project.id} title={project.title} description={project.description} date={project.date} />
+              <li key={project.projectID}>
+                <ProjectItem id={project.projectID} title={project.title} description={project.description} date={project.date} />
               </li>
           ))}
         </ul>
