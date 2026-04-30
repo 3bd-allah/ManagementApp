@@ -17,7 +17,8 @@ const ProjectDetails = () => {
       setTasks(prevTasks => projectTasks ? projectTasks : []);
     }
     loadTasks();
-  },[])
+  },[projectID])
+  console.log(tasks)
 
   function handleAddTask(e){
     e.preventDefault();
@@ -127,6 +128,6 @@ export default ProjectDetails;
 export const loader = ({ params }) => {
   // implement loader func to import project data here:
   const project = JSON.parse(localStorage.getItem(params.projectId));
-  console.log(project)
+  // console.log(project)
   return project;
 };
