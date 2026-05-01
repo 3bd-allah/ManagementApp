@@ -44,14 +44,18 @@ export function ProjectsContextProvider({ children }) {
   }
 
   function renameProject(pId, newTitle) {
+    let updatedProjectForStorage;
     setProjects((prevProjects) => {
       return prevProjects.map((project) => {
         if (project.projectID === pId) {
-          return { ...project, title: newTitle };
+          const updatedProject = { ...project, title: newTitle };
+          updatedProjectForStorage = updatedProject;
+          return updatedProject;
         }
         return project;
       });
     });
+    localStorage.setItem(pId, JSON.stringify(updatedProjectForStorage));
   }
 
   async function addTask(pId, newTask) {

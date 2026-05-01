@@ -3,12 +3,12 @@ import { MoreVertical, Edit2, Trash2 } from "lucide-react";
 import { replace, useNavigate, useParams } from "react-router";
 import { ProjectsContext } from "../store/Projects-context";
 
-const ProjectActionMenu = ({ projectID, projectTitle }) => {
+const ProjectActionMenu = ({ projectID, projectTitle, onRename, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
-  const projectIDInURL = useParams();
   const { renameProject, removeProject } = use(ProjectsContext);
   const navigate = useNavigate();
+
   // 1. CLICK OUTSIDE LOGIC
   // This ensures the menu closes when you click anywhere else on the screen
   useEffect(() => {
@@ -21,16 +21,14 @@ const ProjectActionMenu = ({ projectID, projectTitle }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const onRename = () => {};
-
-  const onDelete = () => {
-    if (projectIDInURL.projectId === projectID) {
-      // If the user is currently viewing the project they're trying to delete, we should navigate them away first
-      // This prevents errors related to trying to access a project that no longer exists in localStorage
-      navigate("/", { replace: true }); // Simple way to navigate to MainPage, which will show the "No Project Selected" state
-    }
-    removeProject(projectID);
-  };
+  // const onDelete = () => {
+  //   if (projectIDInURL.projectId === projectID) {
+  //     // If the user is currently viewing the project they're trying to delete, we should navigate them away first
+  //     // This prevents errors related to trying to access a project that no longer exists in localStorage
+  //     navigate("/", { replace: true }); // Simple way to navigate to MainPage, which will show the "No Project Selected" state
+  //   }
+  //   removeProject(projectID);
+  // };
 
   return (
     <div
