@@ -34,7 +34,6 @@ export function ProjectsContextProvider({ children }) {
   function addProject(project) {
     localStorage.setItem(project.projectID, JSON.stringify(project));
     setProjects((prevProjects) => [project, ...prevProjects]);
-    
   }
 
   function removeProject(pId) {

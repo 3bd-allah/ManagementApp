@@ -18,7 +18,7 @@ const ProjectDetails = () => {
     }
     loadTasks();
   },[projectID])
-  console.log(tasks)
+  
 
   function handleAddTask(e){
     e.preventDefault();
@@ -54,7 +54,7 @@ const ProjectDetails = () => {
         <button
           onClick={() => {
             removeProject(projectID);
-            navigate("/");
+            navigate("/", { replace: true });
           }}
           className="text-stone-600 hover:text-stone-900 transition-colors text-sm font-semibold"
         >
@@ -128,6 +128,6 @@ export default ProjectDetails;
 export const loader = ({ params }) => {
   // implement loader func to import project data here:
   const project = JSON.parse(localStorage.getItem(params.projectId));
-  // console.log(project)
+  console.log(project)
   return project;
 };
