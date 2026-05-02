@@ -8,14 +8,15 @@ const ConfirmProjectDeletion = ({pId, pTitle, onClose}) => {
     const projectIDInURL = useParams();
     const { removeProject } = use(ProjectsContext);
     const navigate = useNavigate();
+    
 
     const onConfirmDelete = () => {
-        if (projectIDInURL.projectId === pId) {
+      if (projectIDInURL.projectId === pId) {
         // If the user is currently viewing the project they're trying to delete, we should navigate them away first
         // This prevents errors related to trying to access a project that no longer exists in localStorage
         navigate("/", { replace: true }); // Simple way to navigate to MainPage, which will show the "No Project Selected" state
-        }
-        removeProject(pId);
+      }
+      removeProject(pId);
     }
   return (
     <div className="p-6 bg-white text-center">
@@ -31,11 +32,7 @@ const ConfirmProjectDeletion = ({pId, pTitle, onClose}) => {
 
     <div className="flex flex-col gap-2 mt-6">
       <button
-        onClick={(e)=>{
-            e.preventDefault();
-            e.stopPropagation();
-            onConfirmDelete();
-        }}
+        onClick={onConfirmDelete}
         className="w-full py-2.5 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition-colors shadow-sm"
       >
         Delete Project

@@ -1,14 +1,17 @@
-import { useState, use, useRef } from 'react'
+import { useState, use } from 'react'
 import { ProjectsContext } from '../store/Projects-context';
+import { useNavigate } from 'react-router';
 
 
 const RenameProject = ({onClose, pId, pTitle}) => {
   const [ newTitle, setNewTitle] = useState(pTitle);
   const { renameProject } = use(ProjectsContext);
-  
+  const navigate = useNavigate();
+
   const renameProjectHandler =()=>{
     renameProject(pId, newTitle);
     onClose();
+    navigate(`/project/${pId}`)
   }
   return (
     <div>

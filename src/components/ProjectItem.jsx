@@ -1,23 +1,14 @@
-import React, { useState, useRef, useEffect, use } from "react";
+import { useRef } from "react";
 import { Link } from "react-router";
 import ProjectActionMenu from "./ProjectActionMenu";
 import Modal from "./Modal";
-import  { ProjectsContext } from "../store/Projects-context";
 import RenameProject from "./RenameProject";
 import ConfirmProjectDeletion from "./ConfirmProjectDeletion";
-const ProjectItem = ({ id, title, date, tasks }) => {
+
+const ProjectItem = ({ id, title }) => {
   const renameModalRef = useRef();
   const deleteModalRef = useRef();
-  const { renameProject } = use(ProjectsContext);
-  const [ newTitle, setNewTitle] = useState(title);
 
-  const handleCloseRenameModal = () => {
-    renameModalRef.current.close();
-  }
-
-  const handleCloseDeleteModal = () => {
-    deleteModalRef.current.close();
-  }
   return (
     <Link
       to={`/project/${id}`}
@@ -25,31 +16,48 @@ const ProjectItem = ({ id, title, date, tasks }) => {
     >
       <span className="truncate pr-4">{title}</span>
       {/* 3 Vertical Dots - visible on hover or if active */}
-      <ProjectActionMenu
-        projectID={id}
-        projectTitle={title}
-        onRename={() => {
-          renameModalRef.current.open();
-        }}
-        onDelete={()=>{
-          deleteModalRef.current.open();
-        }}
+      <div 
+        className="relative inline-block"
+        onClick={e => {
+          e.preventDefault();
+          e.stopPropagation()
+        }} 
+      >
+        <ProjectActionMenu
+          projectID={id}
+          projectTitle={title}
+          onRename={() => {
+            renameModalRef.current.open();
+          }}
+          onDelete={()=>{
+            deleteModalRef.current.open();
+          }}
 
-      />
+       />
 
-      {/* RENAME MODAL */}
-        <Modal
-          ref={renameModalRef}
-          className="rounded-lg shadow-2xl p-0 overflow-hidden border border-stone-200"
-        >
-          <RenameProject pId={id} pTitle={title} onClose={handleCloseRenameModal}/>
-        </Modal>
-        <Modal
-          ref={deleteModalRef}
-          className="rounded-lg shadow-2xl p-0 overflow-hidden border border-stone-200"
-        >
-          <ConfirmProjectDeletion pId={id} pTitle={title} onClose={handleCloseDeleteModal}/>
-        </Modal>
+        {/* RENAME MODAL */}
+          <Modal
+            ref={renameModalRef}
+            className="rounded-lg shadow-2xl p-0 overflow-hidden border border-stone-200"
+          >
+            <RenameProject 
+              pId={id}
+              pTitle={title}
+              onClose={()=> renameModalRef.current.close()}
+            />
+          </Modal>
+        {/* DELETE MODAL */}
+          <Modal
+            ref={deleteModalRef}
+            className="rounded-lg shadow-2xl p-0 overflow-hidden border border-stone-200"
+          >
+            <ConfirmProjectDeletion 
+              pId={id}
+              pTitle={title} 
+              onClose={()=> deleteModalRef.current.close()}
+            />
+          </Modal>
+      </div>
     </Link>
   );
 };

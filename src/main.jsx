@@ -8,14 +8,19 @@ import MainPage from "./components/MainPage.jsx";
 import ProjectItem from "./components/ProjectItem.jsx";
 import ProjectDetails from "./routes/ProjectDetails.jsx";
 import { loader as projectDetailsLoader } from "./routes/ProjectDetails.jsx";
+import ProjectDetailsError from "./components/ProjectDetailsError.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-      {path:'/', element:<MainPage />},
+      { path:'/', element:<MainPage />},
       { path: "create-project", element: <NewProject /> },
-      { path: "project/:projectId", element:<ProjectDetails />, loader : projectDetailsLoader },
+      { path: "project/:projectId", 
+        element:<ProjectDetails />,
+        loader : projectDetailsLoader, 
+        errorElement: <ProjectDetailsError/>,
+       },
     ],
   },
 ]);
