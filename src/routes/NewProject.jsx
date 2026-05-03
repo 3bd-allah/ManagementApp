@@ -19,7 +19,7 @@ const NewProject = () => {
   const handleSubmit = async({title, description, date},{resetForm})=>{
 
     const newProject = {
-        projectID: crypto.randomUUID(),
+        projectID: Date.now(),
         title,
         description,
         date,

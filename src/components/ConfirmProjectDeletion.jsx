@@ -11,7 +11,7 @@ const ConfirmProjectDeletion = ({pId, pTitle, onClose}) => {
     
 
     const onConfirmDelete = () => {
-      if (projectIDInURL.projectId === pId) {
+      if (Number(projectIDInURL.projectId) === pId) {
         // If the user is currently viewing the project they're trying to delete, we should navigate them away first
         // This prevents errors related to trying to access a project that no longer exists in localStorage
         navigate("/", { replace: true }); // Simple way to navigate to MainPage, which will show the "No Project Selected" state

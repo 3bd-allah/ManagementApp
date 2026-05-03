@@ -17,14 +17,15 @@ export function ProjectsContextProvider({ children }) {
 
     function loadProjects(){
       // localStorage.clear()
-
+      let loadedProjects = [];
       for(let i = 0; i < localStorage.length; i++){
         const key = localStorage.key(i);
         const project = JSON.parse(localStorage.getItem(key));
         console.log(project)
-        setProjects(prevProjects => [project, ...prevProjects]);
+        loadedProjects.push(project);
       }
-      
+      const sortedProjects = loadedProjects.sort((a, b) => b.projectID - a.projectID);
+      setProjects(sortedProjects);
     }
 
     loadProjects();
