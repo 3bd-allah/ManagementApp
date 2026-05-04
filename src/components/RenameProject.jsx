@@ -7,7 +7,7 @@ const RenameProject = ({onClose, pId, pTitle}) => {
   const [ newTitle, setNewTitle] = useState(pTitle);
   const { renameProject } = use(ProjectsContext);
   const navigate = useNavigate();
-
+  
   const renameProjectHandler =()=>{
     renameProject(pId, newTitle);
     onClose();

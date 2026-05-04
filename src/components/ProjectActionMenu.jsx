@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, use } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MoreVertical, Edit2, Trash2 } from "lucide-react";
 
 const ProjectActionMenu = ({ onRename, onDelete }) => {
@@ -21,6 +21,10 @@ const ProjectActionMenu = ({ onRename, onDelete }) => {
     <div
       className="relative inline-block"
       ref={menuRef}
+      onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+        }} 
     >
       {/* 2. THE TRIGGER (3 Dots) */}
       <button

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import Sidebar from "../components/Sidebar";
-import { ProjectsContextProvider, ProjectsContext } from "../store/Projects-context";
-import { use } from "react";
+import { ProjectsContextProvider } from "../store/Projects-context";
+
 function App() {
 
   return (
