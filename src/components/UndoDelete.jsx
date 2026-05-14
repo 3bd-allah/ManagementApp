@@ -1,10 +1,11 @@
 import { TimerIcon } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
-
+import { TIMER } from "../assets/Timer";
 const UndoDelete = ({ deletedProjectId, deletedProjectTitle, onUndoClose })=>{
 
-    const [timer, setTimer] = useState(5);
+    const [timer, setTimer] = useState(TIMER/1000);
+
     setTimeout(()=>{
         if(timer > 1){
             setTimer(timer-1);
@@ -25,8 +26,8 @@ return createPortal(
     <div className="flex items-center border-l border-zinc-600 pl-4 gap-2">
       <TimerIcon />
       <span>{timer} s</span>
-      <button 
-        className="ml-2 font-bold text-sky-400 uppercase hover:text-sky-300" 
+      <button
+        className="ml-2 font-bold text-sky-400 uppercase hover:text-sky-300"
         onClick={onUndoClose}
       >
         Undo

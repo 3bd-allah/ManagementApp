@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import ProjectActionMenu from "./ProjectActionMenu";
 import Modal from "./Modal";
 import RenameProject from "./RenameProject";
@@ -12,7 +12,8 @@ const ProjectItem = ({ id, title }) => {
 
   return (
     <>
-      <NavLink
+      <Link
+        viewTransition
         to={`/project/${id}`}
         className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors text-sm"
       >
@@ -29,7 +30,7 @@ const ProjectItem = ({ id, title }) => {
             deleteModalRef.current.open();
           }}
         />
-      </NavLink>
+      </Link>
 
       {/* RENAME MODAL */}
       <Modal

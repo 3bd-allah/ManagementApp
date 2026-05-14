@@ -3,7 +3,7 @@ import { Trash2 } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router';
 import { ProjectsContext } from '../store/Projects-context';
 import UndoDelete from "./UndoDelete";
-
+import { TIMER } from '../assets/Timer';
 const ConfirmProjectDeletion = ({ pId, pTitle, onClose }) => {
     const[showUndo, setShowUndo] = useState(false);
     const[undoTimer, setUndoTimer] = useState(null);
@@ -26,7 +26,7 @@ const ConfirmProjectDeletion = ({ pId, pTitle, onClose }) => {
       onClose();
       const timer = setTimeout(()=>{
         confirmDelete();
-      },5000)
+      },TIMER)
       setUndoTimer(timer);
     }
 

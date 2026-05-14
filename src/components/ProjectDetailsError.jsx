@@ -1,10 +1,9 @@
 import { Link2 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useParams, useRouteLoaderData } from "react-router";
 import { useLoaderData } from "react-router";
 
 
 const ProjectDetailsError = ()=>{
-    const project = useLoaderData();
     return (
         <div>
             <h3>Error!</h3>

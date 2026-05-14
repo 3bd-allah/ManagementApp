@@ -9,6 +9,8 @@ import ProjectItem from "./components/ProjectItem.jsx";
 import ProjectDetails from "./routes/ProjectDetails.jsx";
 import { loader as projectDetailsLoader } from "./routes/ProjectDetails.jsx";
 import ProjectDetailsError from "./components/ProjectDetailsError.jsx";
+import SearchableList from "./components/searchableList/SearchableList.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,7 +22,8 @@ const router = createBrowserRouter([
         element:<ProjectDetails />,
         loader : projectDetailsLoader, 
         errorElement: <ProjectDetailsError/>,
-       },
+      },
+      { path: "search", element: <SearchableList /> }
     ],
   },
 ]);

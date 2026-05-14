@@ -6,15 +6,17 @@ import ProjectItem from "./ProjectItem";
 import { use } from "react";
 import { ProjectsContext } from "../store/Projects-context";
 import ProjectDetails from "../routes/ProjectDetails"
+import SearchIcon from "./searchableList/SearchIcon";
 
 const Sidebar = () => {
   const { projects } = use(ProjectsContext);
   return (
     <aside className="flex flex-col h-full bg-stone-900 text-stone-100 rounded-2xl shadow-xl overflow-hidden">
-      <div className="p-8 pb-4">
+      <div className="flex p-8 pb-4">
         <h2 className="text-xl font-bold uppercase tracking-widest text-stone-400">
           Your Projects
         </h2>
+        <SearchIcon className="ml-6"/>
       </div>
 
       <Link to={'create-project'}>
