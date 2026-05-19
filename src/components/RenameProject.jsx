@@ -13,6 +13,11 @@ const RenameProject = ({onClose, pId, pTitle}) => {
     onClose();
     navigate(`/project/${pId}`)
   }
+
+  const closeRenameModalHandler = () => {
+    setNewTitle(pTitle);
+    onClose();
+  }
   return (
     <div>
         <div className="bg-stone-50 p-6 border-b border-stone-200">
@@ -30,7 +35,7 @@ const RenameProject = ({onClose, pId, pTitle}) => {
               </label>
               <input
                 type="text"
-                defaultValue={pTitle}
+                value={newTitle}
                 onChange={e => setNewTitle(e.target.value)}
                 className="w-full px-4 py-2 border-2 border-stone-200 rounded-md focus:border-stone-800 focus:outline-none transition-colors text-stone-700"
               />
@@ -38,14 +43,14 @@ const RenameProject = ({onClose, pId, pTitle}) => {
 
             <div className="flex justify-end gap-3 mt-8">
               <button
-                onClick={onClose}
+                onClick={closeRenameModalHandler}
                 className="px-4 py-2 text-sm font-medium text-stone-600 hover:text-stone-800 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={renameProjectHandler}
-                disabled={newTitle.trim() === "" || newTitle === pTitle}
+                disabled={ newTitle.trim().length === 0 || newTitle === pTitle }
                 className="disabled:bg-stone-300 disabled:text-stone-500 disabled:cursor-not-allowed px-6 py-2 text-sm font-medium bg-stone-800 text-white rounded-md hover:bg-stone-700 active:bg-stone-900 transition-all shadow-sm"
               >
                 Save Changes
